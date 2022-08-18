@@ -24,7 +24,7 @@ public abstract class GUI implements Listener {
     //region overridable methods
     public abstract void onOpen(Player user);
     public abstract void onClose();
-    public abstract void onClick(int slot);
+    public abstract void onClick(int slot, ItemStack item);
     //endregion
 
     //region styling methods
@@ -83,7 +83,8 @@ public abstract class GUI implements Listener {
             return;
 
         int slot = e.getSlot();
-        onClick(slot);
+        ItemStack item = e.getClickedInventory().getItem(slot);
+        onClick(slot, item);
         e.setCancelled(true);
     }
 
