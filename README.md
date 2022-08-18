@@ -3,7 +3,7 @@ A simple Spigot based GUI-library
 
 __Disclaimer: This isn't a finished project, and currently the library has some unecessery features__
 
-You can create new classes which implement the GUI class, leaving you to override three methods:
+You can create new classes which extends the GUI class, leaving you to override three methods:
 ```
 @Override
 public void onOpen(Player user)
