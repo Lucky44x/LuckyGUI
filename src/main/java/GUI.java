@@ -82,6 +82,7 @@ public abstract class GUI implements Listener {
             return;
 
         int slot = e.getSlot();
+        onClick(slot);
         e.setCancelled(true);
     }
 
