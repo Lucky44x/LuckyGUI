@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -14,8 +15,8 @@ import java.util.Arrays;
 public abstract class GUI implements Listener {
 
     //Internal vars
-    private Player user;
-    private Inventory inv;
+    protected Player user;
+    protected Inventory inv;
 
     //Styling Vars
     private String name;
@@ -68,6 +69,10 @@ public abstract class GUI implements Listener {
     }
 
     public void close(){
+        InventoryView I = user.getOpenInventory();
+        if(I == inv){
+            I.close();
+        }
         onClose();
         GUIManager.instance.close(this);
     }
