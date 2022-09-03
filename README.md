@@ -48,6 +48,8 @@ set(ItemStack item, int slot)
 ```
 - Sets the item at the given slot to the given item
 
+Apart from styling Methods, there are also some practical things you can use for functionality, like the `close` Method, or the `user` variable
+
 
 A complete GUI object might look something like this:
 ```
@@ -72,17 +74,21 @@ class myNewGUI extends GUI{
   }
   
   @Override
-  public void onClose(){}
+  public void onClose(){
+    user.sendMessage(ChatColor.GREEN + "Have a nice day...");
+  }
   
   @Override
   public void onClick(int slot){
     switch(slot){
       case(0):
         confirm();
+        close();
         break;
         
       case(9):
         cancel();
+        close();
         break;
     }
   }
