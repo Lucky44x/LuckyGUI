@@ -2,21 +2,23 @@ package de.lucky44.gui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class GUI implements Listener {
 
     //Internal vars
     protected Player user;
     protected Inventory inv;
+
+    protected InventoryView v;
+    protected List<Integer> moveSlots = new ArrayList<>();
 
     //Styling Vars
     private String name;
@@ -39,6 +41,7 @@ public abstract class GUI implements Listener {
     }
 
     public void construct(){
+        moveSlots = new ArrayList<>();
         inv = Bukkit.createInventory(null, size, name);
     }
 
@@ -49,6 +52,13 @@ public abstract class GUI implements Listener {
         ItemStack[] fill = new ItemStack[size];
         Arrays.fill(fill, backgroundItem);
         inv.setContents(fill);
+    }
+
+    public void movable(int slot){
+        if(moveSlots.contains(slot))
+            moveSlots.remove(slot);
+        else
+            moveSlots.add(slot);
     }
 
     public void set(ItemStack item, int slot){
@@ -65,39 +75,13 @@ public abstract class GUI implements Listener {
         this.user = user;
         onOpen(user);
         GUIManager.instance.registerGUI(this, user);
-        user.openInventory(inv);
+        v = user.openInventory(inv);
     }
+
 
     public void close(){
-        InventoryView I = user.getOpenInventory();
-        if(I == inv){
-            I.close();
-        }
-        onClose();
-        GUIManager.instance.close(this);
-    }
-
-    //endregion
-
-    //region Events
-    @EventHandler
-    public void onSlotClickEvent(InventoryClickEvent e){
-        Player localUser = (Player)e.getWhoClicked();
-
-        if(localUser != user)
-            return;
-
-        int slot = e.getSlot();
-        ItemStack item = e.getClickedInventory().getItem(slot);
-        onClick(slot, item);
-        e.setCancelled(true);
-    }
-
-    @EventHandler
-    public void onInventoryClosed(InventoryCloseEvent e){
-        if(((Player)e.getPlayer()) == user){
-            close();
-        }
+        GUIManager.instance.close(user);
+        user.getOpenInventory().close();
     }
     //endregion
 }
