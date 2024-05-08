@@ -35,6 +35,18 @@
 
         <dependency>
             <groupId>com.github.lucky44x</groupId>
+            <artifactId>luckygui-1_20_R3</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lucky44x</groupId>
+            <artifactId>luckygui-1_20_R2</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lucky44x</groupId>
             <artifactId>luckygui-1_20_R1</artifactId>
             <version>${project.parent.version}</version>
             <scope>compile</scope>

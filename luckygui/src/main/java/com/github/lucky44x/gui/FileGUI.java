@@ -448,7 +448,7 @@ public abstract class FileGUI extends GUI {
         textReplacements.put(key, value);
     }
 
-    private ItemStack getTaggedItem(String tag) {
+    protected ItemStack getTaggedItem(String tag) {
         if (!generatedItems.containsKey(tag)) {
             Bukkit.getLogger().warning("Could not find item tagged " + tag + " for GUI " + title);
             return null;

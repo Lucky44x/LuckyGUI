@@ -278,6 +278,7 @@ public abstract class GUI {
             final int rawSlot = e.getRawSlot();
             if (e.getAction().equals(InventoryAction.MOVE_TO_OTHER_INVENTORY)) {
                 e.setCancelled(true);
+                return;
             }
 
             e.setCancelled(!interactableSlots.contains(rawSlot));
